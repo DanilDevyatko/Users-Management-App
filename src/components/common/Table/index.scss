@@ -1,0 +1,38 @@
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .table {
+    margin-top: 100px;
+    padding: 100px;
+    border-radius: 20px;
+    background-color: #0b6882;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 20px;
+    color: #8ccadb;
+  }
+
+  td {
+    color: #fff;
+  }
+
+  thead {
+    tr {
+      border-bottom: 2px solid #8ccadb;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 2px solid #fff;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}
