@@ -1,4 +1,3 @@
-import './index.css'
 import { Table } from '../../common/Table'
 
 function App() {
