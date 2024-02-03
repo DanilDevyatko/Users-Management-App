@@ -1,6 +1,8 @@
-export function Button({text, handleFunction}) {
+import './index.scss';
+
+export function Button({text, onClick}) {
   return (
-    <button onClick={handleFunction}>
+    <button onClick={onClick}>
       {text}
     </button>
   )

@@ -1,5 +1,6 @@
-import { TableRow } from "../TableRow/index.jsx";
-  
+import { TableRow } from "../TableRow";
+import './index.scss';
+
 const users = [
   {
     id: '1',

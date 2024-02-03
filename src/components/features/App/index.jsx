@@ -1,5 +1,5 @@
 import './index.css'
-import { Table } from '../../common/Table/index.jsx'
+import { Table } from '../../common/Table'
 
 function App() {
 

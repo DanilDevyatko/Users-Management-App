@@ -1,7 +1,8 @@
-import { Button } from "../Button/index.jsx";
+import { Button } from "../Button";
 
-export function TableRow({data: {id, name, surname, age}}) {
-  
+export function TableRow({data}) {
+  const {id, name, surname, age} = data;
+
   return (
     <tr>
       <td>{id}</td>
@@ -9,8 +10,8 @@ export function TableRow({data: {id, name, surname, age}}) {
       <td>{surname}</td>
       <td>{age}</td>
       <td>
-        <Button text="edit" handleFunction={() => console.log('edit')}/>
-        <Button text="remove" handleFunction={() => console.log('remove')}/>
+        <Button text="edit" onClick={() => console.log('edit')}/>
+        <Button text="remove" onClick={() => console.log('remove')}/>
       </td>
     </tr>
   )
