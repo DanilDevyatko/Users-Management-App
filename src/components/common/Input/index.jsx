@@ -1,5 +1,11 @@
-export function Input({type, id, value, onChage}) {
+export function Input({type, id, value, onChange}) {
+
+  function handleChange(e) {
+    const {id , value} = e.target;
+
+    onChange(id, value)
+  }
   return (
-    <input onChange={(event) => {onChage(`${id}`, event.target.value)}} type={type} id={id} value={value}/>
+    <input onChange={handleChange} type={type} id={id} value={value}/>
   )
 }
