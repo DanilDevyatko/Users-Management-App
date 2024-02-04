@@ -21,8 +21,6 @@ function App() {
 
   const [isAddNewUserPopupOpen, setisAddNewUserPopupOpen] = useState(false);
 
-  
-
   function toggleAddUserPopupOpen() {
     setisAddNewUserPopupOpen(prevStatus => !prevStatus)
   } 

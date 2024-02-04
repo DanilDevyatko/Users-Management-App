@@ -5,7 +5,6 @@ export function Popup({isOpen, children}) {
 
   return (
     <div className="popup">
-      <h1>Add new user</h1>
       {children}
     </div>
   )

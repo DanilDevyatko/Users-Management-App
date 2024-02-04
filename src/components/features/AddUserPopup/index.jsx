@@ -3,13 +3,7 @@ import { Button } from "../../common/Button";
 import { Popup } from "../../common/Popup";
 import { Form } from "../../common/Form";
 
-export function AddUserPopup(
-  {
-    isOpen, 
-    onAdd,
-    onClose,
-  }) {
-
+export function AddUserPopup({isOpen, onAdd, onClose}) {
     const [formFields, setFormFields] = useState({
       name: '',
       surname: '',
@@ -43,11 +37,11 @@ export function AddUserPopup(
         surname: '',
         age: '',
       })
-      
     }
 
   return (
     <Popup isOpen={isOpen}>
+      <h1>Add new user</h1>
       <Form onChangeInput={onChangeInput} formFields={formFields}/>
       <div className="button-group">
         <Button text="Add" onClick={onSubmit}/>
