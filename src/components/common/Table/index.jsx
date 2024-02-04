@@ -1,22 +1,7 @@
 import { TableRow } from "../TableRow";
-import './index.scss';
+import "./index.scss";
 
-const users = [
-  {
-    id: '1',
-    name: 'Danil',
-    surname: 'Deviatko',
-    age: '25',
-  },
-  {
-    id: '2',
-    name: 'Maksim',
-    surname: 'Derskiy',
-    age: '24',
-  }
-];
-
-export function Table() {
+export function Table({usersList}) {
   return (
     <div  className="table-wrapper">
       <table className="table">
@@ -29,7 +14,7 @@ export function Table() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => <TableRow key={user.id} data={user}/>)}
+          {usersList.map((user) => <TableRow key={user.id} data={user}/>)}
         </tbody>
       </table>
     </div>

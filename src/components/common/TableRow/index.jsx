@@ -10,7 +10,7 @@ export function TableRow({data}) {
       <td>{surname}</td>
       <td>{age}</td>
       <td>
-        <Button text="edit" onClick={() => console.log('edit')}/>
+        <Button text="edit" />
         <Button text="remove" onClick={() => console.log('remove')}/>
       </td>
     </tr>
