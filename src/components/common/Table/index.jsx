@@ -1,7 +1,7 @@
 import { TableRow } from "../TableRow";
 import "./index.scss";
 
-export function Table({usersList}) {
+export function Table({usersList, toggleEditUserPopupOpen, getUserById}) {
   return (
     <div  className="table-wrapper">
       <table className="table">
@@ -14,7 +14,13 @@ export function Table({usersList}) {
           </tr>
         </thead>
         <tbody>
-          {usersList.map((user) => <TableRow key={user.id} data={user}/>)}
+          {usersList.map((user) => (
+            <TableRow 
+              key={user.id} 
+              data={user} 
+              toggleEditUserPopupOpen={toggleEditUserPopupOpen} 
+              getUserById={getUserById}/>
+          ))}
         </tbody>
       </table>
     </div>

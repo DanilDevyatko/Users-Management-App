@@ -32,7 +32,7 @@ export function AddUserPopup({isOpen, onAdd, onClose}) {
       onAdd(formFields);
       onClose();
 
-      setInputValue({
+      setFormFields({
         name: '',
         surname: '',
         age: '',
