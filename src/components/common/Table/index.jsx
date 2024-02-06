@@ -1,7 +1,13 @@
 import { TableRow } from "../TableRow";
 import "./index.scss";
 
-export function Table({usersList, toggleEditUserPopupOpen, getUserById}) {
+export function Table({
+  usersList, 
+  toggleEditUserPopupOpen, 
+  toggleDeleteUserPopupOpen, 
+  getEditingUserUserById, 
+  getDeletingUserById
+}) {
   return (
     <div  className="table-wrapper">
       <table className="table">
@@ -18,8 +24,11 @@ export function Table({usersList, toggleEditUserPopupOpen, getUserById}) {
             <TableRow 
               key={user.id} 
               data={user} 
-              toggleEditUserPopupOpen={toggleEditUserPopupOpen} 
-              getUserById={getUserById}/>
+              toggleEditUserPopupOpen={toggleEditUserPopupOpen}
+              toggleDeleteUserPopupOpen={toggleDeleteUserPopupOpen}
+              getEditingUserUserById={getEditingUserUserById}
+              getDeletingUserById={getDeletingUserById}
+            />
           ))}
         </tbody>
       </table>

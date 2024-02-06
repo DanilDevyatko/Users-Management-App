@@ -1,6 +1,12 @@
 import { Button } from "../Button";
 
-export function TableRow({data, toggleEditUserPopupOpen, getUserById}) {
+export function TableRow({
+  data, 
+  toggleEditUserPopupOpen, 
+  toggleDeleteUserPopupOpen, 
+  getEditingUserUserById, 
+  getDeletingUserById
+}) {
   const {id, name, surname, age} = data;
 
   return (
@@ -12,9 +18,12 @@ export function TableRow({data, toggleEditUserPopupOpen, getUserById}) {
       <td>
         <Button text="edit" onClick={() => {
           toggleEditUserPopupOpen();
-          getUserById(id);
+          getEditingUserUserById(id);
         }} />
-        <Button text="remove" onClick={() => console.log('remove')}/>
+        <Button text="remove" onClick={()=>{
+          toggleDeleteUserPopupOpen();
+          getDeletingUserById(id);
+        }}/>
       </td>
     </tr>
   )
