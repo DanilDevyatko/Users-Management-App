@@ -1,7 +1,15 @@
 import { Button } from "../Button";
 
-export function TableRow({data}) {
+export function TableRow({data, onEdit, onDelete}) {
   const {id, name, surname, age} = data;
+
+  function handleEdit() {
+      onEdit(id)
+  }
+
+  function handleDelete() {
+    onDelete(id);
+  }
 
   return (
     <tr>
@@ -10,8 +18,8 @@ export function TableRow({data}) {
       <td>{surname}</td>
       <td>{age}</td>
       <td>
-        <Button text="edit" />
-        <Button text="remove" onClick={() => console.log('remove')}/>
+        <Button text="edit" onClick={handleEdit} />
+        <Button text="remove" onClick={handleDelete} />
       </td>
     </tr>
   )

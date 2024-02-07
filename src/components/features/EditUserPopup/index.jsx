@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../common/Button";
 import { Popup } from "../../common/Popup";
 import { Form } from "../../common/Form";
 
-export function AddUserPopup({isOpen, onAdd, onClose}) {
-    const [formFields, setFormFields] = useState({
-      name: '',
-      surname: '',
-      age: '',
-    });
-  
-    function onChangeInput(fieldName, value) {
-      setFormFields(prevValue => {
-        return {
-          ...prevValue,
-          [fieldName]: value,
-        }
+export function EditUserPopup({isOpen, onEdit, onClose, initialUserData}) {
+  const [formFields, setFormFields] = useState({
+    name: '',
+    surname: '',
+    age: '',
+  });
+
+  useEffect(() => {
+    if (initialUserData) {
+      setFormFields({
+        name: initialUserData.name || '',
+        surname: initialUserData.surname || '',
+        age: initialUserData.age || '',
       });
     }
+  }, [initialUserData]);
+  
+  function onChangeInput(fieldName, value) {
+    setFormFields(prevValue => {
+      return {
+        ...prevValue,
+        [fieldName]: value,
+      }
+    });
+  }
 
 // 1. Validation
 // 2. if validation fails error
@@ -29,7 +39,7 @@ export function AddUserPopup({isOpen, onAdd, onClose}) {
         return
       }
 
-      onAdd(formFields);
+      onEdit(formFields, initialUserData.id);
       onClose();
 
       setFormFields({
@@ -41,10 +51,10 @@ export function AddUserPopup({isOpen, onAdd, onClose}) {
 
   return (
     <Popup isOpen={isOpen}>
-      <h1>Add new user</h1>
+      <h1>Edit user</h1>
       <Form onChangeInput={onChangeInput} formFields={formFields}/>
       <div className="button-group">
-        <Button text="Add" onClick={onSubmit}/>
+        <Button text="Edit" onClick={onSubmit}/>
         <Button text="Cancel" onClick={onClose}/>
       </div>
     </Popup>

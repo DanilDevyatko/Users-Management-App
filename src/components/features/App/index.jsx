@@ -1,6 +1,8 @@
 import { Table } from "../../common/Table"
 import { Button } from "../../common/Button"
-import { AddUserPopup } from "../../features/AddUserPopup";
+import { EditUserPopup } from "../EditUserPopup";
+import { AddUserPopup } from "../AddUserPopup";
+import { DeleteUserPopup } from "../DeleteUserPopup";
 import { useState } from "react";
 
 function App() {
@@ -19,12 +21,39 @@ function App() {
     }
   ]);
 
-  const [isAddNewUserPopupOpen, setisAddNewUserPopupOpen] = useState(false);
+  const [isAddNewUserPopupOpen, setIsAddNewUserPopupOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
+  const [deletingUserId, setDeletingUserId] = useState(null);
 
   function toggleAddUserPopupOpen() {
-    setisAddNewUserPopupOpen(prevStatus => !prevStatus)
-  } 
+    setIsAddNewUserPopupOpen(prevStatus => !prevStatus)
+  }
 
+  function handleEditUser(id) {
+    console.log(id);
+    setEditingUser(usersList.find(user => user.id === id));
+  }
+
+  function handleCloseEdit() {
+    setEditingUser(null);
+  }
+
+  function handleCloseDelete() {
+    setDeletingUserId(null);
+  }
+
+  function editUser(newUserObject, id) {
+    let newUsersList = usersList.map((user)=> {
+      if (user.id === id) {
+        return {...user, ...newUserObject}
+      }
+      return user;
+    })
+    
+
+    setUsersList(newUsersList);
+  }
+  
   function addNewUser(newUserObject) {
     const lastObject = usersList.length - 1;
     const lastObjectId = usersList[lastObject].id;
@@ -41,17 +70,37 @@ function App() {
     ]);
   }
 
+  function deleteUser() {
+    const newUsersList = usersList.filter((user) => user.id !== deletingUser);
+    setUsersList(newUsersList);
+  }
+
   return (
     <>
       <Button 
         text={isAddNewUserPopupOpen ? 'Close' : 'Add new user +'}
         onClick={toggleAddUserPopupOpen}
       />
-      <Table usersList={usersList}/>
+      <Table 
+        usersList={usersList}
+        onEdit={handleEditUser}
+        onDelete={setDeletingUserId}
+      />
       <AddUserPopup 
         isOpen={isAddNewUserPopupOpen}
         onAdd={addNewUser}
         onClose={toggleAddUserPopupOpen}
+      />
+      <EditUserPopup 
+        isOpen={!!editingUser}
+        onEdit={editUser}
+        onClose={handleCloseEdit}
+        initialUserData={editingUser}
+      />
+      <DeleteUserPopup 
+        isOpen={!!deletingUserId}
+        onDelete={deleteUser}
+        onClose={handleCloseDelete}
       />
     </>
   )
