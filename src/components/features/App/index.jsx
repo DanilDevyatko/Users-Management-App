@@ -22,31 +22,26 @@ function App() {
   ]);
 
   const [isAddNewUserPopupOpen, setIsAddNewUserPopupOpen] = useState(false);
-  const [isEditUserPopupOpen, setIsEditUserPopupOpen] = useState(false);
-  const [isDeleteUserPopupOpen, setIsDeleteUserPopupOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState();
-  const [deletingUser, setDeletingUser] = useState();
-
-  function toggleEditUserPopupOpen() {
-    setIsEditUserPopupOpen(prevStatus => !prevStatus)
-  } 
+  const [editingUser, setEditingUser] = useState(null);
+  const [deletingUserId, setDeletingUserId] = useState(null);
 
   function toggleAddUserPopupOpen() {
     setIsAddNewUserPopupOpen(prevStatus => !prevStatus)
-  } 
-
-  function toggleDeleteUserPopupOpen() {
-    setIsDeleteUserPopupOpen(prevStatus => !prevStatus)
-  } 
-
-  function getEditingUserUserById(id) {
-    setEditingUser(usersList.find(user => user.id === id))
   }
 
-  function getDeletingUserById(id) {
-    setDeletingUser(id);
+  function handleEditUser(id) {
+    console.log(id);
+    setEditingUser(usersList.find(user => user.id === id));
   }
-//I was close to solution but faced problem. The problem was that I need to put return in if condition and in map to return from map. I thought map return new array itself without return. Also need to discuss.
+
+  function handleCloseEdit() {
+    setEditingUser(null);
+  }
+
+  function handleCloseDelete() {
+    setDeletingUserId(null);
+  }
+
   function editUser(newUserObject, id) {
     let newUsersList = usersList.map((user)=> {
       if (user.id === id) {
@@ -87,11 +82,9 @@ function App() {
         onClick={toggleAddUserPopupOpen}
       />
       <Table 
-        usersList={usersList} 
-        toggleEditUserPopupOpen={toggleEditUserPopupOpen}
-        toggleDeleteUserPopupOpen={toggleDeleteUserPopupOpen}
-        getEditingUserUserById={getEditingUserUserById}
-        getDeletingUserById={getDeletingUserById}
+        usersList={usersList}
+        onEdit={handleEditUser}
+        onDelete={setDeletingUserId}
       />
       <AddUserPopup 
         isOpen={isAddNewUserPopupOpen}
@@ -99,15 +92,15 @@ function App() {
         onClose={toggleAddUserPopupOpen}
       />
       <EditUserPopup 
-        isOpen={isEditUserPopupOpen}
+        isOpen={!!editingUser}
         onEdit={editUser}
-        onClose={toggleEditUserPopupOpen}
+        onClose={handleCloseEdit}
         initialUserData={editingUser}
       />
       <DeleteUserPopup 
-        isOpen={isDeleteUserPopupOpen}
+        isOpen={!!deletingUserId}
         onDelete={deleteUser}
-        onClose={toggleDeleteUserPopupOpen}
+        onClose={handleCloseDelete}
       />
     </>
   )
